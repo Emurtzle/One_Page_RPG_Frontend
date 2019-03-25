@@ -1,5 +1,7 @@
 
 let body = document.body;
+let oppMove;
+let direction;
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
@@ -25,7 +27,7 @@ function everyinterval(n) {
   }
 
 var myGamePiece;
-var myObstacles = [];
+var testRect;
 
 function component(width, height, color, x ,y) {
     this.width = width;
@@ -45,23 +47,22 @@ function component(width, height, color, x ,y) {
         this.y += this.speedY;
     }
     this.crashWith = function(otherobj) {
-           if(this.checkUpper(otherobj) || this.checkLower(otherobj) || this.checkLeft(otherobj) || this.checkRight(otherobj)) { return false}
-    //     var myleft = this.x;
-    //     var myright = this.x + (this.width);
-    //     var mytop = this.y;
-    //     var mybottom = this.y + (this.height);
-    //     var otherleft = otherobj.x;
-    //     var otherright = otherobj.x + (otherobj.width);
-    //     var othertop = otherobj.y;
-    //     var otherbottom = otherobj.y + (otherobj.height);
-    //     var crash = true;
-    //     if ((mybottom < othertop) ||
-    //     (mytop > otherbottom) ||
-    //     (myright < otherleft) ||
-    //     (myleft > otherright)) {
-    //       crash = false;
-    //     }
-    //     return crash;
+        var myleft = this.x;
+        var myright = this.x + (this.width);
+        var mytop = this.y;
+        var mybottom = this.y + (this.height);
+        var otherleft = otherobj.x;
+        var otherright = otherobj.x + (otherobj.width);
+        var othertop = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash = true;
+        if ((mybottom < othertop) ||
+        (mytop > otherbottom) ||
+        (myright < otherleft) ||
+        (myleft > otherright)) {
+        crash = false;
+        }
+        return crash;
       }
 
     this.checkLeft = function(otherobj) {
@@ -125,52 +126,63 @@ function stopMove() {
   
 
 function updateGameArea() {
-    var x, y;
-  for (i = 0; i < myObstacles.length; i += 1) {
-    if (myGamePiece.crashWith(myObstacles[i])) {
-      myGameArea.stop();
-      return;
-    } 
-  }
+    if (myGamePiece.crashWith(testRect)) {
+    //    console.log("OppMove: ", oppMove);
+    //    oppMove();
+
+        if (direction == 0) {
+            myGamePiece.y += 10;
+        } else if (direction == 1) {
+            myGamePiece.y -= 10;
+        } else if (direction == 2) {
+            myGamePiece.x += 10;
+        } else if (direction == 3) {
+            myGamePiece.x -= 10;
+        }
+
+    }
+
     myGameArea.clear();
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 1 || everyinterval(150)) {
-        x = myGameArea.canvas.width;
-        minHeight = 20;
-        maxHeight = 200;
-        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-        minGap = 50;
-        maxGap = 200;
-        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myObstacles.push(new component(10, height, "green", x, 0));
-        myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
-      }
-    for (i = 0; i < myObstacles.length; i += 1) {
-        myObstacles[i].x += -1;
-        myObstacles[i].update();
-    }
     myGamePiece.newPos();
+    testRect.update();
     myGamePiece.update();
 }
 
 function startGame() {
     myGameArea.start();
+    testRect = new component(250, 100, "magenta", 200 , 200)
     myGamePiece = new component(30, 30, "red", 10, 120);
-    myObstacle = new component(10, 200, "green", 300, 120); 
 }
 
 body.addEventListener("keydown", (ev) => {
     switch (ev.keyCode) {
         case 87:
+            oppMove = () => {
+                moveDown();
+            }
+            direction = 0;
             moveUp();
         break;
         case 83:
+            oppMove = () => {
+                moveUp();
+            }
+            direction = 1;
             moveDown();
         break;
         case 65:
+            oppMove = () => {
+                moveRight();
+            }
+            direction = 2;
             moveLeft();
         break;
         case 68:
+            oppMove = () => {
+                moveLeft();
+            }
+            direction = 3;
             moveRight();
         break;
     }
