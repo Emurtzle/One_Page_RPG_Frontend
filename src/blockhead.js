@@ -1,5 +1,5 @@
-class Hero {
-    constructor(id) {
+class Blockhead {
+    constructor(id){
         this.id = id;
         this.name = "";
         this.health = 0;
@@ -7,11 +7,11 @@ class Hero {
         this.attack = 0;
         this.defence = 0;
         this.speed = 0;
-        this.loadData();
+        this.loadData()
     }
 
     loadData() {
-        fetch("http://localhost:3000/api/v1/heros")
+        fetch('http://localhost:3000/api/v1/blockheads')
         .then(response => response.json())
         .then(json => {
             this.name = json[this.id].name;
