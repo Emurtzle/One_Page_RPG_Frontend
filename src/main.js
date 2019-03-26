@@ -6,6 +6,7 @@ ckhead = new Blockhead(4);
 head = new Blockhead(5);
 
 gb = new GameBoard(window.innerWidth, window.innerHeight);
-gb.start();
+gb.init();
 gb.loadHero(hero);
 gb.loadBlockHead(blockhead);
+gb.start();
