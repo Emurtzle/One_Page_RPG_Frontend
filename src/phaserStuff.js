@@ -17,11 +17,10 @@ var config = {
 var game = new Phaser.Game(config);
 
 var heroPiece;
-var blockhead;
-var blockhead1;
 var cursors;
 
 var invincible = false;
+var heroSpeed = 0;
 
 function preload() {
     this.load.image('bg', './assets/tiled.png')
@@ -37,21 +36,11 @@ function create() {
     heroPiece = this.physics.add.sprite(100, 450, 'heroPiece');
     heroPiece.setCollideWorldBounds(true);
 
-    blockhead = this.physics.add.sprite(200, 100, 'blockhead');
-    blockhead1 = this.physics.add.sprite(200, 200, 'blockhead');
-    blockhead2 = this.physics.add.sprite(200, 300, 'blockhead');
-    blockhead3 = this.physics.add.sprite(200, 400, 'blockhead');
-    blockhead4 = this.physics.add.sprite(200, 500, 'blockhead');
-
-    this.physics.add.collider(heroPiece, blockhead, damage);
-    this.physics.add.collider(heroPiece, blockhead1, damage);
-    this.physics.add.collider(heroPiece, blockhead2, damage);
-    this.physics.add.collider(heroPiece, blockhead3, damage);
-    this.physics.add.collider(heroPiece, blockhead4, damage);
-    
-
-
     sam.setHeroPiece(heroPiece);
+    heroSpeed = sam.speed;
+
+    var that = this;
+    createBlockHeads(that, blockHeadArray);
 }
 
 function checkBounds(obj){
@@ -60,6 +49,17 @@ function checkBounds(obj){
     }
     else {
         return false
+    }
+}
+
+function createBlockHeads(that, blockHeadArray) {
+    for (const bh of blockHeadArray) {
+        var xPos = Math.floor((Math.random() * 600) + 100);
+        var yPos = Math.floor((Math.random() * 500) + 5);
+
+        var tempBh = that.physics.add.sprite(xPos, yPos, 'blockhead');
+        bh.setBhPiece(tempBh);
+        that.physics.add.collider(heroPiece, tempBh, damage);
     }
 }
 
@@ -85,28 +85,30 @@ function setInvincibility() {
 
 
 function update(){
-        if (cursors.left.isDown)
+    heroSpeed = sam.speed;
+
+    if (cursors.left.isDown)
     {
-        heroPiece.setVelocityX(-120);
+        heroPiece.setVelocityX(-120 - (100 * heroSpeed));
     }
     else if (cursors.right.isDown)
     {
-        heroPiece.setVelocityX(120);
+        heroPiece.setVelocityX(120 + (100 * heroSpeed));
     }
     else if (cursors.down.isDown)
     {
-        heroPiece.setVelocityY(120);
+        heroPiece.setVelocityY(120 + (100 * heroSpeed));
     }
     else if (cursors.up.isDown)
     {
-        heroPiece.setVelocityY(-120);
+        heroPiece.setVelocityY(-120 - (100 * heroSpeed));
     }
     else
     {
         heroPiece.setVelocityX(0);
         heroPiece.setVelocityY(0);
     }
-    if (checkBounds(blockhead)){
-        blockhead.active = false;
-    }
+    // if (checkBounds(blockhead)){
+    //     blockhead.active = false;
+    // }
 }
