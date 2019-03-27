@@ -39,17 +39,13 @@ function create() {
     sam.setHeroPiece(heroPiece);
     heroSpeed = sam.speed;
 
+    this.enemies = this.add.group();
     var that = this;
     createBlockHeads(that, blockHeadArray);
-}
 
-function checkBounds(obj){
-    if(obj.x > 800 || obj.y > 600 || obj.x < 0 || obj.y < 0){
-        return true
-    }
-    else {
-        return false
-    }
+    setInterval(() => {
+        moveBlockheads();
+    }, 500);
 }
 
 function createBlockHeads(that, blockHeadArray) {
@@ -59,13 +55,35 @@ function createBlockHeads(that, blockHeadArray) {
 
         var tempBh = that.physics.add.sprite(xPos, yPos, 'blockhead');
         bh.setBhPiece(tempBh);
-        that.physics.add.collider(heroPiece, tempBh, damage);
+        that.enemies.add(tempBh);
+        that.physics.add.collider(heroPiece, tempBh, () => {heroDamage(bh)});
+        tempBh.setCollideWorldBounds(true);
     }
 }
 
-function damage() {
+function moveBlockheads() {
+    for (const bh of blockHeadArray) {
+        bhPiece = bh.getBhPiece();
+
+        var randMove = Math.floor(Math.random() * 4 + 1);
+        
+        if (randMove == 1) {
+            bhPiece.body.velocity.x = 200;
+        } else if (randMove == 2) {
+            bhPiece.body.velocity.x = -200;
+        } else if (randMove == 3) {
+            bhPiece.body.velocity.y = 200;
+        } else if (randMove == 4) {
+            bhPiece.body.velocity.y = -200;
+        }
+    }
+}
+
+function heroDamage(bh) {
     if (invincible == false) {
-        sam.takeDamage(2);
+        console.log(bh);
+        sam.takeDamage(bh.attack);
+        bh.takeDamage(sam.attack);
         setInvincibility();
     }
 }
@@ -108,7 +126,4 @@ function update(){
         heroPiece.setVelocityX(0);
         heroPiece.setVelocityY(0);
     }
-    // if (checkBounds(blockhead)){
-    //     blockhead.active = false;
-    // }
 }

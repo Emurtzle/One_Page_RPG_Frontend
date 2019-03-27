@@ -2,6 +2,8 @@ let sam;
 
 let blockHeadArray = [];
 
+let targetDiv = document.createElement("div");
+
 let bh;
 let bh1;
 let bh2;
@@ -27,10 +29,44 @@ fetch("http://localhost:3000/api/v1/blockheads")
 })
 
 function loadBlockHeadData(json) {
-
     for (const elem of json) {
-        blockHeadArray.push(new Blockhead(elem.id, elem.name, elem.health, elem .level, elem.attack, elem.defence, elem.speed));
+        var temp = new Blockhead(elem.id, elem.name, elem.health, elem .level, elem.attack, elem.defence, elem.speed);
+        var tempDiv = createBhDiv(temp.id);
+       
+        temp.setDiv(tempDiv);
+        temp.displayStats();
+        targetDiv.appendChild(tempDiv);
+
+        blockHeadArray.push(temp);
     }
 
+    document.body.appendChild(targetDiv);
+}
 
+function createBhDiv(id) {
+    let bhDiv = document.createElement("div");
+
+    let bhNameLabel = document.createElement("label");
+    let bhNameSpan = document.createElement("span");
+    let br = document.createElement("br");
+    let bhHealthLabel = document.createElement("label");
+    let bhHealthSpan = document.createElement("span");
+
+    bhDiv.id = `bh-div-${id}`;
+    bhNameLabel.id = `bh-name-label-${id}`;
+    bhNameSpan.id = `bh-name-span-${id}`;
+    br.id = `bh-br-${id}`;
+    bhHealthLabel.id = `bh-health-label-${id}`;
+    bhHealthSpan.id = `bh-health-span-${id}`;
+
+    bhNameLabel.textContent = "Name: ";
+    bhHealthLabel.textContent = "Health: ";
+
+    bhDiv.appendChild(bhNameLabel);
+    bhDiv.appendChild(bhNameSpan);
+    bhDiv.appendChild(br);
+    bhDiv.appendChild(bhHealthLabel);
+    bhDiv.appendChild(bhHealthSpan);
+
+    return bhDiv;
 }

@@ -17,6 +17,19 @@ class Blockhead {
         return this.bhPiece;
     }
 
+    setDiv(div) {
+        this.div = div;
+    }
+
+    getDiv() {
+        return this.div;
+    }
+
+    displayStats() {
+        this.div.childNodes[1].textContent = this.name;
+        this.div.childNodes[4].textContent = this.health
+    }
+
     takeDamage(dmg) {
         this.health -= dmg;
         this.displayStats();
