@@ -46,7 +46,7 @@ class Hero {
     }
 
     isDead() {
-        if (health < 0) {
+        if (health <= 0) {
             return true;
         }
         return false;
