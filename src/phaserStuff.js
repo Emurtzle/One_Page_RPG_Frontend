@@ -5,7 +5,6 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            // gravity: { y: 300 },
             debug: false
         }
     },
@@ -37,11 +36,18 @@ function create() {
 
     heroPiece = this.physics.add.sprite(100, 450, 'heroPiece');
     heroPiece.setCollideWorldBounds(true);
-    blockhead = this.physics.add.sprite(200, 450, 'blockhead');
-    blockhead1 = this.physics.add.sprite(200, 250, 'blockhead');
+
+    blockhead = this.physics.add.sprite(200, 100, 'blockhead');
+    blockhead1 = this.physics.add.sprite(200, 200, 'blockhead');
+    blockhead2 = this.physics.add.sprite(200, 300, 'blockhead');
+    blockhead3 = this.physics.add.sprite(200, 400, 'blockhead');
+    blockhead4 = this.physics.add.sprite(200, 500, 'blockhead');
 
     this.physics.add.collider(heroPiece, blockhead, damage);
     this.physics.add.collider(heroPiece, blockhead1, damage);
+    this.physics.add.collider(heroPiece, blockhead2, damage);
+    this.physics.add.collider(heroPiece, blockhead3, damage);
+    this.physics.add.collider(heroPiece, blockhead4, damage);
     
 
 
@@ -65,8 +71,14 @@ function damage() {
 }
 
 function setInvincibility() {
+    let statsDiv = document.getElementById("stats");
+    
+    
+    statsDiv.style.background = "red";
+    
     invincible = true;
     setTimeout(() => {
+        statsDiv.style.background = "";
         invincible = false;
     }, 2000);
 }
@@ -95,6 +107,6 @@ function update(){
         heroPiece.setVelocityY(0);
     }
     if (checkBounds(blockhead)){
-    blockhead.active = false
+        blockhead.active = false;
     }
 }
