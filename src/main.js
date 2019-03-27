@@ -31,7 +31,6 @@ function loadBlockHeadData(json) {
     ckhead = new Blockhead(json[4].id, json[4].name, json[4].health, json[4].level, json[4].attack, json[4].defence, json[5].speed);
     head = new Blockhead(json[5].id, json[5].name, json[5].health, json[5].level, json[5].attack, json[5].defence, json[5].speed);
 
-    debugger;
 
     blockHeadArray.push(clockhead);
     blockHeadArray.push(lockhead);
@@ -39,5 +38,4 @@ function loadBlockHeadData(json) {
     blockHeadArray.push(ckhead);
     blockHeadArray.push(head);
 
-    debugger;
 }

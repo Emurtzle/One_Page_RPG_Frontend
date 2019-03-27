@@ -74,13 +74,13 @@ function setInvincibility() {
     let statsDiv = document.getElementById("stats");
     
     
-    statsDiv.style.background = "red";
+    statsDiv.style.background = "pink";
     
     invincible = true;
     setTimeout(() => {
         statsDiv.style.background = "";
         invincible = false;
-    }, 2000);
+    }, 1000);
 }
 
 

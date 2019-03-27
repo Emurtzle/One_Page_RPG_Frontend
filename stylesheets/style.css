@@ -1,0 +1,11 @@
+img {
+    /* float: right; */
+    margin-left: 320px;
+}
+.heroStats {
+    width: 100px; 
+}
+
+.container {
+    display: inline-grid;
+  }
