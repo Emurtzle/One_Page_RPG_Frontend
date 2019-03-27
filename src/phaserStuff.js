@@ -22,7 +22,7 @@ var blockhead;
 var cursors;
 
 function preload() {
-    this.load.image('bg', './assets/floor.png')
+    this.load.image('bg', './assets/tiled.png')
     this.load.image('hero', './assets/eva.png')
     this.load.image('blockhead', './assets/blocky.png')
 }
@@ -41,7 +41,7 @@ function create() {
 }
 
 function checkBounds(obj){
-    if(obj.x > 800 || obj.y > 600){
+    if(obj.x > 800 || obj.y > 600 || obj.y < 0 || obj.x < 0){
         return true
     }
     else {
