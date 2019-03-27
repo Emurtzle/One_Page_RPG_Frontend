@@ -1,25 +1,74 @@
 class Hero {
-    constructor(id) {
+    constructor(id, name, health, level, progress, attack, defence, speed) {
         this.id = id;
-        this.name = "";
-        this.health = 0;
-        this.level = 0;
-        this.attack = 0;
-        this.defence = 0;
-        this.speed = 0;
-        this.loadData();
+        this.name = name;
+        this.health = health;
+        this.level = level;
+        this.progress = progress;
+        this.attack = attack;
+        this.defence = defence;
+        this.speed = speed;
     }
 
-    loadData() {
-        fetch("http://localhost:3000/api/v1/heros")
-        .then(response => response.json())
-        .then(json => {
-            this.name = json[this.id].name;
-            this.health = json[this.id].health;
-            this.level = json[this.id].level;
-            this.attack = json[this.id].attack;
-            this.defence = json[this.id].defence;
-            this.speed = json[this.id].speed;
-        })
+    displayStats() {
+        let body = document.body;
+        let nameSpan = document.getElementById("name");
+        let healthSpan = document.getElementById("health");
+        let levelSpan = document.getElementById("level");
+        let attackSpan = document.getElementById("attack");
+        let defenceSpan = document.getElementById("defence");
+        let speedSpan = document.getElementById("speed");
+
+        nameSpan.textContent = this.name;
+        healthSpan.textContent = this.health;
+        levelSpan.textContent = this.level;
+        attackSpan.textContent = this.attack;
+        defenceSpan.textContent = this.defence;
+        speedSpan.textContent = this.speed;
+    }
+
+    setHeroPiece(heroPiece) {
+        this.heroPiece = heroPiece;
+    }
+
+    getHeroPiece() {
+        return this.heroPiece;
+    }
+
+    takeDamage(dmg) {
+        this.health -= dmg;
+        this.displayStats();
+    }
+
+    heal() {
+        this.health = 10;
+        this.displayStats();
+    }
+
+    isDead() {
+        if (health < 0) {
+            return true;
+        }
+        return false;
+    }
+
+    addSpeedStat() {
+        this.speed++;
+        this.displayStats();
+    }
+
+    addHealthStat() {
+        this.health++;
+        this.displayStats();
+    }
+
+    addLevelStat() {
+        this.level++;
+        this.displayStats();
+    }
+
+    addDefenceStat() {
+        this.defence++;
+        this.displayStats();
     }
 }
