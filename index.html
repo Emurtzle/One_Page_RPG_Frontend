@@ -8,35 +8,39 @@
     <link rel="stylesheet" href="stylesheets/style.css">
     <title>Java the Script</title>
 </head>
-<body id="bod">
+<main id="pre">
         <div class="heroStats" id="stats">
-                <label>Name: </label>
-                <span id="name"></span>
-                <br>
+                <label>NAME: </label>
+                <span id="name" style="color:cadetblue"></span>
         
-                <label>Health: </label>
+                <label>HEALTH: </label>
                 <span id="health"></span>
-                <br>
         
-                <label>Level: </label>
+                <label>LEVEL: </label>
                 <span id="level"></span>
-                <br>
         
-                <label>Attack: </label>
+                <label>ATT: </label>
                 <span id="attack"></span>
-                <br>
         
-                <label>Defence: </label>
+                <label>DEF: </label>
                 <span id="defence"></span>
-                <br>
         
-                <label>Speed: </label>
+                <label>SPEED: </label>
                 <span id="speed"></span>
-                <br>
             </div>
+            <div class="targets">Current Target(s):
+            <div class="blockStats">
+                    <label>NAME: </label>
+                    <span id="bname" style="color:rgb(57, 8, 8)"></span>
             
+                    <label>HEALTH: </label>
+                    <span id="bhealth" style="color:rgb(227, 115, 74)"></span>
+            </div>
+        </div>
+    </main>
 
-
+<body>
+    <img id="jsImg" src="assets/javathescript.png">
     <script src="src/blockhead.js"></script>
     <script src="src/hero.js"></script>
     <script src="src/main.js"></script>
