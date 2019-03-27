@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/icon.png" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>One Page RPG</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <title>Java the Script</title>
 </head>
-<body>
+<body id="bod">
+        <div class="heroStats" id="stats">
+                <label>Name: </label>
+                <span id="name"></span>
+                <br>
+        
+                <label>Health: </label>
+                <span id="health"></span>
+                <br>
+        
+                <label>Level: </label>
+                <span id="level"></span>
+                <br>
+        
+                <label>Attack: </label>
+                <span id="attack"></span>
+                <br>
+        
+                <label>Defence: </label>
+                <span id="defence"></span>
+                <br>
+        
+                <label>Speed: </label>
+                <span id="speed"></span>
+                <br>
+            </div>
+            
 
-    <script src="src/hero.js"></script>
+
     <script src="src/blockhead.js"></script>
-    <script src="src/gameBoard.js"></script>
+    <script src="src/hero.js"></script>
     <script src="src/main.js"></script>
+    <script src="stylesheets/styleStuff.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.js"></script>
+    <script src="src/phaserStuff.js"></script>
 </body>
 </html>

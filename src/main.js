@@ -27,7 +27,10 @@ fetch("http://localhost:3000/api/v1/blockheads")
 })
 
 function loadBlockHeadData(json) {
+
     for (const elem of json) {
         blockHeadArray.push(new Blockhead(elem.id, elem.name, elem.health, elem .level, elem.attack, elem.defence, elem.speed));
     }
+
+
 }
