@@ -41,7 +41,8 @@ class Hero {
     }
 
     isDead() {
-        if (health <= 0) {
+        if (this.health <= 0) {
+            gameOverSound.play();
             return true;
         }
         return false;

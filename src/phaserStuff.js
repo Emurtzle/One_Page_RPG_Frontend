@@ -22,6 +22,10 @@ var cursors;
 var enemies;
 var healtex;
 var vortexAnim;
+var them;
+var music;
+var gameOverSound;
+var killBlockheadSound;
 
 var invincible = false;
 var canHeal = true;
@@ -36,6 +40,7 @@ function preload() {
     this.load.audio('nice', './assets/nice.mp3')
 
     this.load.audio('despacito', './assets/despacito.mp3')
+    this.load.audio('bummer', './assets/bummer.mp3')
 
     this.load.image('healtex0', './assets/spritesheet-0.png')
     this.load.image('healtex1', './assets/spritesheet-1.png')
@@ -135,9 +140,13 @@ function create() {
 
     this.add.image(400, 300, 'bg');
 
-    music = this.sound.add('despacito', {volume: 1.0});
-    music.play();
-    music.setLoop(true);
+    them = this;
+
+    gameOverSound = this.sound.add('bummer');
+
+    music = this.sound.add('despacito');
+    // music.play();
+    // music.setLoop(true);
 
     heroPiece = this.physics.add.sprite(100, 450, 'heroPiece');
     heroPiece.setCollideWorldBounds(true);
@@ -292,7 +301,7 @@ function moveBlockheads() {
 function heroDamage(bh) {
     if (invincible == false) {
         woof.play();
-        sam.takeDamage(bh.attack);
+        sam.takeDamage(5);
         bh.takeDamage(sam.attack);
         setInvincibility();
     }
@@ -360,6 +369,13 @@ function update(){
     }
 
     checkBlockheadDeath();
+
+    if (sam.isDead()) {
+        them.add.text(game.config.width / 5, game.config.height / 2, 'GAME OVER', { fontSize: '96px', fill: '#fff' });
+        them.physics.pause();
+        // gameOver = true;
+    }
+
 }
 
 function checkBlockheadDeath() {
