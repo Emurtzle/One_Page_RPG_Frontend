@@ -24,7 +24,6 @@ var healtex;
 var vortexAnim;
 var them;
 var music;
-var gameOverSound;
 var killBlockheadSound;
 
 var invincible = false;
@@ -40,7 +39,7 @@ function preload() {
     this.load.audio('nice', './assets/nice.mp3')
 
     this.load.audio('despacito', './assets/despacito.mp3')
-    this.load.audio('bummer', './assets/bummer.mp3')
+    this.load.audio('yeahboi', './assets/yeahboi.mp3')
 
     this.load.image('healtex0', './assets/spritesheet-0.png')
     this.load.image('healtex1', './assets/spritesheet-1.png')
@@ -142,7 +141,7 @@ function create() {
 
     them = this;
 
-    gameOverSound = this.sound.add('bummer');
+    killBlockheadSound = this.sound.add('yeahboi');
 
     music = this.sound.add('despacito');
     music.play();
@@ -390,6 +389,8 @@ function checkBlockheadDeath() {
             // debugger;
             enemies.children.entries[i].destroy();
             blockHeadArray.splice(i,1);
+
+            killBlockheadSound.play();
 
             
         }
