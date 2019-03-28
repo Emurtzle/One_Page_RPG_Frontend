@@ -1,14 +1,9 @@
 main {
     display: grid;
     grid-template-columns: 15% 45% 20%;
-    /* grid-auto-rows: minmax(100px, auto);
-    max-height: 220px;*/
     grid-gap: 1em;
     margin-top: 50px;
     max-width: 1200px;
-    /* grid-template-areas: 
-    "heroStats ."
-    "targets targets"; */
   }
 
 item1 {
