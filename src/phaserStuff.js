@@ -145,8 +145,8 @@ function create() {
     gameOverSound = this.sound.add('bummer');
 
     music = this.sound.add('despacito');
-    // music.play();
-    // music.setLoop(true);
+    music.play();
+    music.setLoop(true);
 
     heroPiece = this.physics.add.sprite(100, 450, 'heroPiece');
     heroPiece.setCollideWorldBounds(true);
@@ -301,8 +301,8 @@ function moveBlockheads() {
 function heroDamage(bh) {
     if (invincible == false) {
         woof.play();
-        sam.takeDamage(5);
-        bh.takeDamage(sam.attack);
+        sam.takeDamage(bh.attack);
+        bh.takeDamage(5);
         setInvincibility();
     }
 }
@@ -373,7 +373,12 @@ function update(){
     if (sam.isDead()) {
         them.add.text(game.config.width / 5, game.config.height / 2, 'GAME OVER', { fontSize: '96px', fill: '#fff' });
         them.physics.pause();
-        // gameOver = true;
+        gameOver = true;
+    }
+
+    if (blockHeadArray.length === 0) {
+        them.add.text(game.config.width / 5, game.config.height / 2, 'YOU WIN!', { fontSize: '96px', fill: 'purple' });
+        them.physics.pause();
     }
 
 }
