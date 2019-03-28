@@ -30,6 +30,7 @@ var invincible = false;
 var canHeal = true;
 var audioSlower = 0;
 var heroSpeed = 0;
+var frozen = false;
 
 function preload() {
     this.load.image('bg', './assets/tiled.png')
@@ -37,6 +38,7 @@ function preload() {
     this.load.image('blockhead', './assets/blocky.png')
     this.load.audio('oof', './assets/oof.mp3')
     this.load.audio('nice', './assets/nice.mp3')
+    this.load.image('iceboi', './assets/zero.png')
 
     this.load.audio('despacito', './assets/despacito.mp3')
     this.load.audio('yeahboi', './assets/yeahboi.mp3')
@@ -271,12 +273,23 @@ function createBlockHeads(that, blockHeadArray) {
     for (const bh of blockHeadArray) {
         var xPos = Math.floor((Math.random() * 600) + 100);
         var yPos = Math.floor((Math.random() * 500) + 5);
+        var rand = Math.floor((Math.random() * 3) + 1);
+        var tempBh;
 
-        var tempBh = that.physics.add.sprite(xPos, yPos, 'blockhead');
-        bh.setBhPiece(tempBh);
-        enemies.add(tempBh);
-        that.physics.add.collider(heroPiece, tempBh, () => {heroDamage(bh)});
-        tempBh.setCollideWorldBounds(true);
+        if (rand == 3) {
+            tempBh = that.physics.add.sprite(xPos, yPos, 'iceboi');
+            bh.setBhPiece(tempBh);
+            enemies.add(tempBh);
+            that.physics.add.collider(heroPiece, tempBh, () => {heroDamageFreeze(bh)});
+            tempBh.setCollideWorldBounds(true);
+            tempBh.setScale(2);
+        } else {
+            tempBh = that.physics.add.sprite(xPos, yPos, 'blockhead');
+            bh.setBhPiece(tempBh);
+            enemies.add(tempBh);
+            that.physics.add.collider(heroPiece, tempBh, () => {heroDamage(bh)});
+            tempBh.setCollideWorldBounds(true);
+        }
     }
 }
 
@@ -301,10 +314,36 @@ function heroDamage(bh) {
     if (invincible == false) {
         woof.play();
         sam.takeDamage(bh.attack);
-        bh.takeDamage(5);
+        bh.takeDamage(sam.attack);
         setInvincibility();
     }
 }
+
+function heroDamageFreeze(bh) {
+    if (invincible == false) {
+        woof.play();
+        sam.takeDamage(bh.attack);
+        bh.takeDamage(sam.attack)
+        heroPiece.setVelocityX(0);
+        heroPiece.setVelocityY(0);
+        setInvincibility();
+        freeze();
+    }
+}
+
+function freeze() {
+    let statsDiv = document.getElementById("stats");
+    
+    
+    statsDiv.style.background = "cyan";
+    
+    frozen = true;
+    setTimeout(() => {
+        statsDiv.style.background = "";
+        frozen = false;
+    }, 1000);
+}
+
 function heal() {
     if (sam.heroPiece.x > 350 && sam.heroPiece.x < 450 && sam.heroPiece.y < 350 && sam.heroPiece.y > 250) {
         // debugger;
@@ -345,26 +384,29 @@ function update(){
 
     heal();
 
-    if (cursors.left.isDown)
-    {
-        heroPiece.setVelocityX(-120 - (50 * heroSpeed));
-    }
-    else if (cursors.right.isDown)
-    {
-        heroPiece.setVelocityX(120 + (50 * heroSpeed));
-    }
-    else if (cursors.down.isDown)
-    {
-        heroPiece.setVelocityY(120 + (50 * heroSpeed));
-    }
-    else if (cursors.up.isDown)
-    {
-        heroPiece.setVelocityY(-120 - (50 * heroSpeed));
-    }
-    else
-    {
-        heroPiece.setVelocityX(0);
-        heroPiece.setVelocityY(0);
+    if (frozen == false) {
+
+        if (cursors.left.isDown)
+        {
+            heroPiece.setVelocityX(-120 - (50 * heroSpeed));
+        }
+        else if (cursors.right.isDown)
+        {
+            heroPiece.setVelocityX(120 + (50 * heroSpeed));
+        }
+        else if (cursors.down.isDown)
+        {
+            heroPiece.setVelocityY(120 + (50 * heroSpeed));
+        }
+        else if (cursors.up.isDown)
+        {
+            heroPiece.setVelocityY(-120 - (50 * heroSpeed));
+        }
+        else
+        {
+            heroPiece.setVelocityX(0);
+            heroPiece.setVelocityY(0);
+        }
     }
 
     checkBlockheadDeath();
