@@ -29,6 +29,8 @@ var statsDiv = document.getElementById("stats");
 var lBar = document.getElementById('level')
 var progBar = document.styleSheets[0].cssRules[1].style.width
 
+var tempBlockheadArray;
+
 var invincible = false;
 var canHeal = true;
 var audioSlower = 0;
@@ -274,7 +276,8 @@ function create() {
 }
 
 function createBlockHeads(that, blockHeadArray) {
-    for (const bh of blockHeadArray) {
+    tempBlockheadArray = blockHeadArray;
+    for (const bh of tempBlockheadArray) {
         var xPos = Math.floor((Math.random() * 600) + 100);
         var yPos = Math.floor((Math.random() * 500) + 5);
         var rand = Math.floor((Math.random() * 3) + 1);
@@ -420,7 +423,7 @@ function update(){
         gameOver = true;
     }
 
-    if (blockHeadArray.length === 0) {
+    if (tempBlockheadArray.length === 0) {
         them.add.text(game.config.width / 5, game.config.height / 2, 'YOU WIN!', { fontSize: '96px', fill: 'indigo' });
         them.physics.pause();
     }
@@ -428,11 +431,11 @@ function update(){
 }
 
 function checkBlockheadDeath() {
-    for (let i = 0; i<blockHeadArray.length; i++) {
-        if (blockHeadArray[i].isDead()){
-            blockHeadArray[i].die();
+    for (let i = 0; i<tempBlockheadArray.length; i++) {
+        if (tempBlockheadArray[i].isDead()){
+            tempBlockheadArray[i].die();
             enemies.children.entries[i].destroy();
-            blockHeadArray.splice(i,1);
+            tempBlockheadArray.splice(i,1);
 
             killBlockheadSound.play();
             if (killCounter < 100) {
