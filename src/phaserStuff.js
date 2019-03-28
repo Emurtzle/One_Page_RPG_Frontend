@@ -18,6 +18,7 @@ var game = new Phaser.Game(config);
 var woof;
 var heroPiece;
 var cursors;
+var enemies;
 
 var invincible = false;
 var heroSpeed = 0;
@@ -42,7 +43,7 @@ function create() {
     sam.setHeroPiece(heroPiece);
     heroSpeed = sam.speed;
 
-    this.enemies = this.add.group();
+    enemies = this.add.group();
     var that = this;
     createBlockHeads(that, blockHeadArray);
 
@@ -59,26 +60,25 @@ function createBlockHeads(that, blockHeadArray) {
 
         var tempBh = that.physics.add.sprite(xPos, yPos, 'blockhead');
         bh.setBhPiece(tempBh);
-        that.enemies.add(tempBh);
+        enemies.add(tempBh);
         that.physics.add.collider(heroPiece, tempBh, () => {heroDamage(bh)});
         tempBh.setCollideWorldBounds(true);
     }
 }
 
 function moveBlockheads() {
-    for (const bh of blockHeadArray) {
-        bhPiece = bh.getBhPiece();
+    for (const bh of enemies.children.entries) {
 
         var randMove = Math.floor(Math.random() * 4 + 1);
         
         if (randMove == 1) {
-            bhPiece.body.velocity.x = 200;
+            bh.body.velocity.x = 200;
         } else if (randMove == 2) {
-            bhPiece.body.velocity.x = -200;
+            bh.body.velocity.x = -200;
         } else if (randMove == 3) {
-            bhPiece.body.velocity.y = 200;
+            bh.body.velocity.y = 200;
         } else if (randMove == 4) {
-            bhPiece.body.velocity.y = -200;
+            bh.body.velocity.y = -200;
         }
     }
 }
@@ -135,7 +135,12 @@ function update(){
 }
 
 function checkBlockheadDeath() {
-    for (const blockhead of blockHeadArray) {
-        console.log("is dead?: ",blockhead.isDead());
+    for (let i = 0; i<blockHeadArray.length; i++) {
+        if (blockHeadArray[i].isDead()){
+            blockHeadArray[i].die();
+            // debugger;
+            let holder = enemies.children.entries[i];
+            holder.destroy();
+        }
     }
 }

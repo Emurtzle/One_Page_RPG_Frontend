@@ -45,7 +45,7 @@ class Blockhead {
     }
 
     isDead() {
-        if (health <= 0) {
+        if (this.health <= 0) {
             return true;
         }
         return false;
