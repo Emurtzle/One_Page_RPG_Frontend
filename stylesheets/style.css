@@ -1,18 +1,21 @@
 main {
     display: grid;
-    grid-template-columns: 25% 75%;
+    grid-template-columns: 15% 45% 20%;
     /* grid-auto-rows: minmax(100px, auto);
     max-height: 220px;*/
     grid-gap: 1em;
     margin-top: 50px;
-    max-width: 800px;
+    max-width: 1200px;
     grid-template-areas: 
     "heroStats ."
     "targets targets";
   }
 
-item2 {
+item1 {
     grid-area: heroStats;
+}
+item2 {
+    grid-area: nothin;
 }
 item3 {
     grid-area: targets;
@@ -32,6 +35,12 @@ item3 {
 }
 
 .targets {
+    position: fixed;
+    overflow-y:scroll;
+    overflow-x:scroll;
+    top: 60px;
+    right: 0;
+    bottom: 0;
     font-family: 'Courier New', Courier, monospace
 }
 
@@ -46,4 +55,8 @@ img {
   right: 0;
   width: 300px;
   border: 3px solid black;
+}
+
+.blockStats {
+    padding: 5px;
 }

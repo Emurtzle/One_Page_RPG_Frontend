@@ -27,7 +27,7 @@ class Blockhead {
 
     displayStats() {
         this.div.childNodes[1].textContent = this.name;
-        this.div.childNodes[4].textContent = this.health
+        this.div.childNodes[3].textContent = this.health
     }
 
     takeDamage(dmg) {

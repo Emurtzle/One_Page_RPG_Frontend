@@ -15,7 +15,7 @@ var config = {
     }
 };
 var game = new Phaser.Game(config);
-
+var woof;
 var heroPiece;
 var cursors;
 
@@ -26,6 +26,9 @@ function preload() {
     this.load.image('bg', './assets/tiled.png')
     this.load.image('heroPiece', './assets/eva.png')
     this.load.image('blockhead', './assets/blocky.png')
+
+    this.load.audio('oof', './assets/oof.mp3')
+    // this.load.audio('blockhit', './assets/blockhit')
 }
 
 function create() {
@@ -46,6 +49,7 @@ function create() {
     setInterval(() => {
         moveBlockheads();
     }, 500);
+    woof = this.sound.add('oof');
 }
 
 function createBlockHeads(that, blockHeadArray) {
@@ -81,7 +85,7 @@ function moveBlockheads() {
 
 function heroDamage(bh) {
     if (invincible == false) {
-        console.log(bh);
+        woof.play();
         sam.takeDamage(bh.attack);
         bh.takeDamage(sam.attack);
         setInvincibility();

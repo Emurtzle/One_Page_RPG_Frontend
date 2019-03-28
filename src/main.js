@@ -2,7 +2,7 @@ let sam;
 
 let blockHeadArray = [];
 
-let targetDiv = document.createElement("div");
+let targetDiv = document.getElementById("targetDiv");
 
 let bh;
 let bh1;
@@ -53,18 +53,21 @@ function createBhDiv(id) {
     let bhHealthSpan = document.createElement("span");
 
     bhDiv.id = `bh-div-${id}`;
+    bhDiv.className="blockStats"
     bhNameLabel.id = `bh-name-label-${id}`;
     bhNameSpan.id = `bh-name-span-${id}`;
-    br.id = `bh-br-${id}`;
+    bhNameSpan.style = "color:rgb(57, 8, 8)"
+    // br.id = `bh-br-${id}`;
     bhHealthLabel.id = `bh-health-label-${id}`;
     bhHealthSpan.id = `bh-health-span-${id}`;
+    bhHealthSpan.style = "color:rgb(227, 115, 74)"
 
     bhNameLabel.textContent = "Name: ";
     bhHealthLabel.textContent = "Health: ";
 
     bhDiv.appendChild(bhNameLabel);
     bhDiv.appendChild(bhNameSpan);
-    bhDiv.appendChild(br);
+    // bhDiv.appendChild(br);
     bhDiv.appendChild(bhHealthLabel);
     bhDiv.appendChild(bhHealthSpan);
 
