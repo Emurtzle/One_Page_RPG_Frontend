@@ -39,21 +39,6 @@ class Hero {
         this.health -= dmg;
         this.displayStats();
     }
-    debugger
-    heal() {
-        if (sam.heroPiece.x > 350 && sam.heroPiece.x < 450 && sam.heroPiece.y < 350 && sam.heroPiece.y > 250) {
-            // debugger;
-            if (this.health < 10 && canHeal === true) {
-            this.health += 1
-            this.displayStats()
-            this.setCanHeal()}
-        }
-    }
-
-    setCanHeal() {
-        setTimeout(() => {
-        this.canHeal = false}, 500);
-    }
 
     isDead() {
         if (health <= 0) {

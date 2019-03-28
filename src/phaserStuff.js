@@ -133,7 +133,6 @@ function create() {
     this.add.image(400, 300, 'bg');
 
     heroPiece = this.physics.add.sprite(100, 450, 'heroPiece');
-    testChunk = this.physics.add.sprite(500, 500, 'chunk')
     heroPiece.setCollideWorldBounds(true);
 
     sam.setHeroPiece(heroPiece);
@@ -290,6 +289,22 @@ function heroDamage(bh) {
         setInvincibility();
     }
 }
+function heal() {
+    if (sam.heroPiece.x > 350 && sam.heroPiece.x < 450 && sam.heroPiece.y < 350 && sam.heroPiece.y > 250) {
+        // debugger;
+        if (sam.health < 10 && canHeal === true) {
+        sam.health += 1
+        sam.displayStats()
+        setCanHeal()}
+    }
+}
+
+function setCanHeal() {
+    canHeal = false;
+    setTimeout(() => {
+    canHeal = true;
+}, 500);
+}
 
 function setInvincibility() {
     let statsDiv = document.getElementById("stats");
@@ -307,7 +322,8 @@ function setInvincibility() {
 
 function update(){
     heroSpeed = sam.speed;
-    sam.heal()
+
+    heal();
 
     if (cursors.left.isDown)
     {
