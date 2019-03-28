@@ -30,9 +30,17 @@ class Blockhead {
         this.div.childNodes[3].textContent = this.health
     }
 
+    flashDiv() {
+        this.div.style.background = "pink";
+        setTimeout(() => {
+            this.div.style.background = "";
+        }, 500)
+    }
+
     takeDamage(dmg) {
         this.health -= dmg;
         this.displayStats();
+        this.flashDiv();
     }
 
     heal() {
