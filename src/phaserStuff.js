@@ -130,4 +130,12 @@ function update(){
         heroPiece.setVelocityX(0);
         heroPiece.setVelocityY(0);
     }
+
+    checkBlockheadDeath();
+}
+
+function checkBlockheadDeath() {
+    for (const blockhead of blockHeadArray) {
+        console.log("is dead?: ",blockhead.isDead());
+    }
 }
