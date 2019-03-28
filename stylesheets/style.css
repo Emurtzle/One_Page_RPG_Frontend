@@ -6,9 +6,9 @@ main {
     grid-gap: 1em;
     margin-top: 50px;
     max-width: 1200px;
-    grid-template-areas: 
+    /* grid-template-areas: 
     "heroStats ."
-    "targets targets";
+    "targets targets"; */
   }
 
 item1 {
@@ -26,6 +26,7 @@ item3 {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
 }
+
 .blockStats {
     display: grid;
     grid-row-gap: 1px;
