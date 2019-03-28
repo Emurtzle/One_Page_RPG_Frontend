@@ -23,6 +23,7 @@ var healtex;
 var vortexAnim;
 
 var invincible = false;
+var canHeal = true;
 var heroSpeed = 0;
 
 function preload() {
@@ -30,6 +31,8 @@ function preload() {
     this.load.image('heroPiece', './assets/eva.png')
     this.load.image('blockhead', './assets/blocky.png')
     this.load.audio('oof', './assets/oof.mp3')
+
+    this.load.image('chunk', './assets/icon.png')
 
     this.load.image('healtex0', './assets/spritesheet-0.png')
     this.load.image('healtex1', './assets/spritesheet-1.png')
@@ -130,6 +133,7 @@ function create() {
     this.add.image(400, 300, 'bg');
 
     heroPiece = this.physics.add.sprite(100, 450, 'heroPiece');
+    testChunk = this.physics.add.sprite(500, 500, 'chunk')
     heroPiece.setCollideWorldBounds(true);
 
     sam.setHeroPiece(heroPiece);
@@ -244,7 +248,7 @@ function create() {
         repeat: -1
     });
 
-    this.add.sprite(400, 300, 'healtex0').play('healFactor');
+    healtex = this.add.sprite(400, 300, 'healtex0').play('healFactor');
 
 }
 
@@ -303,6 +307,7 @@ function setInvincibility() {
 
 function update(){
     heroSpeed = sam.speed;
+    sam.heal()
 
     if (cursors.left.isDown)
     {
