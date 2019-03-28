@@ -1,8 +1,9 @@
 class Hero {
-    constructor(id, name, health, level, progress, attack, defence, speed) {
+    constructor(id, name, health, maxHealth, level, progress, attack, defence, speed) {
         this.id = id;
         this.name = name;
         this.health = health;
+        this.maxHealth = maxHealth
         this.level = level;
         this.progress = progress;
         this.attack = attack;
