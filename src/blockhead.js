@@ -40,8 +40,12 @@ class Blockhead {
         this.displayStats();
     }
 
+    die() {
+        this.div.remove();
+    }
+
     isDead() {
-        if (health < 0) {
+        if (health <= 0) {
             return true;
         }
         return false;

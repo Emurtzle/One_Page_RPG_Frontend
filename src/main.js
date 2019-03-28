@@ -56,7 +56,7 @@ function createBhDiv(id) {
     bhDiv.className="blockStats"
     bhNameLabel.id = `bh-name-label-${id}`;
     bhNameSpan.id = `bh-name-span-${id}`;
-    bhNameSpan.style = "color:rgb(57, 8, 8)"
+    bhNameSpan.style = "color:rgb(170, 128, 255)"
     // br.id = `bh-br-${id}`;
     bhHealthLabel.id = `bh-health-label-${id}`;
     bhHealthSpan.id = `bh-health-span-${id}`;
