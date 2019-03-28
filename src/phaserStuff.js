@@ -377,7 +377,7 @@ function update(){
     }
 
     if (blockHeadArray.length === 0) {
-        them.add.text(game.config.width / 5, game.config.height / 2, 'YOU WIN!', { fontSize: '96px', fill: 'purple' });
+        them.add.text(game.config.width / 5, game.config.height / 2, 'YOU WIN!', { fontSize: '96px', fill: 'indigo' });
         them.physics.pause();
     }
 
