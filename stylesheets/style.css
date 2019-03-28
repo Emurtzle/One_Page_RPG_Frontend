@@ -1,3 +1,18 @@
+.progress {
+    width:300px;
+    height:20px;
+    border:1px solid black;
+    position:relative;
+}
+
+.progress:after {
+    content:'\A';
+    position:absolute;
+    background:rgb(128, 21, 138);
+    top:0; bottom:0;
+    left:0; 
+    width:0%;
+}
 main {
     display: grid;
     grid-template-columns: 15% 45% 20%;
@@ -56,20 +71,4 @@ img {
 .blockStats {
     padding: 5px;
     font-weight: bold;
-}
-
-.progress {
-    width:300px;
-    height:20px;
-    border:1px solid black;
-    position:relative;
-}
-
-.progress:after {
-    content:'\A';
-    position:absolute;
-    background:rgb(128, 21, 138);
-    top:0; bottom:0;
-    left:0; 
-    width:75%;
 }

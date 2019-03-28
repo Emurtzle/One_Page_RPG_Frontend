@@ -25,10 +25,14 @@ var vortexAnim;
 var them;
 var music;
 var killBlockheadSound;
+var statsDiv = document.getElementById("stats");
+var lBar = document.getElementById('level')
+var progBar = document.styleSheets[0].cssRules[1].style.width
 
 var invincible = false;
 var canHeal = true;
 var audioSlower = 0;
+var killCounter = 0;
 var heroSpeed = 0;
 var frozen = false;
 
@@ -366,7 +370,6 @@ function setCanHeal() {
 }
 
 function setInvincibility() {
-    let statsDiv = document.getElementById("stats");
     
     
     statsDiv.style.background = "pink";
@@ -428,12 +431,24 @@ function checkBlockheadDeath() {
     for (let i = 0; i<blockHeadArray.length; i++) {
         if (blockHeadArray[i].isDead()){
             blockHeadArray[i].die();
-            // debugger;
             enemies.children.entries[i].destroy();
             blockHeadArray.splice(i,1);
 
             killBlockheadSound.play();
-
+            if (killCounter < 100) {
+            killCounter += 50;
+            document.styleSheets[0].cssRules[1].style.width = killCounter.toString()+'%'}
+            else {
+            document.styleSheets[0].cssRules[1].style.width = "0%"
+            killCounter = 0
+            sam.addLevelStat()
+            lBar.style.background = "yellow"
+            lBar.innerText =  "LEVEL UP!!!!"
+            setTimeout(() => {
+                lBar.style.background = "";
+                lBar.innerText = sam.level
+            }, 1000);
+            }
             
         }
     }
