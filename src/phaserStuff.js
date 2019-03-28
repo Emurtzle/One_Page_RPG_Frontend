@@ -139,8 +139,10 @@ function checkBlockheadDeath() {
         if (blockHeadArray[i].isDead()){
             blockHeadArray[i].die();
             // debugger;
-            let holder = enemies.children.entries[i];
-            holder.destroy();
+            enemies.children.entries[i].destroy();
+            blockHeadArray.splice(i,1);
+
+            
         }
     }
 }
