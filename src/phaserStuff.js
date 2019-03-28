@@ -16,6 +16,7 @@ var config = {
 };
 var game = new Phaser.Game(config);
 var woof;
+var nice;
 var heroPiece;
 var cursors;
 var enemies;
@@ -24,6 +25,7 @@ var vortexAnim;
 
 var invincible = false;
 var canHeal = true;
+var audioSlower = 0;
 var heroSpeed = 0;
 
 function preload() {
@@ -31,8 +33,7 @@ function preload() {
     this.load.image('heroPiece', './assets/eva.png')
     this.load.image('blockhead', './assets/blocky.png')
     this.load.audio('oof', './assets/oof.mp3')
-
-    this.load.image('chunk', './assets/icon.png')
+    this.load.audio('nice', './assets/nice.mp3')
 
     this.load.audio('despacito', './assets/despacito.mp3')
 
@@ -153,6 +154,7 @@ function create() {
     }, 500);
 
     woof = this.sound.add('oof');
+    nice = this.sound.add('nice');
 
     this.anims.create({
         key: 'healFactor',
@@ -299,8 +301,12 @@ function heal() {
     if (sam.heroPiece.x > 350 && sam.heroPiece.x < 450 && sam.heroPiece.y < 350 && sam.heroPiece.y > 250) {
         // debugger;
         if (sam.health < 10 && canHeal === true) {
-        sam.health += 1
-        sam.displayStats()
+        sam.health += 1;
+        audioSlower +=1;
+        if(audioSlower === 1 || audioSlower%4 === 0){
+            nice.play()
+        }
+        sam.displayStats();
         setCanHeal()}
     }
 }
