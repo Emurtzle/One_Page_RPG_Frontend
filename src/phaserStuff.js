@@ -34,6 +34,8 @@ function preload() {
 
     this.load.image('chunk', './assets/icon.png')
 
+    this.load.audio('despacito', './assets/despacito.mp3')
+
     this.load.image('healtex0', './assets/spritesheet-0.png')
     this.load.image('healtex1', './assets/spritesheet-1.png')
     this.load.image('healtex2', './assets/spritesheet-2.png')
@@ -131,6 +133,10 @@ function create() {
     cursors = this.input.keyboard.createCursorKeys();
 
     this.add.image(400, 300, 'bg');
+
+    music = this.sound.add('despacito', {volume: 1.0});
+    music.play();
+    music.setLoop(true);
 
     heroPiece = this.physics.add.sprite(100, 450, 'heroPiece');
     heroPiece.setCollideWorldBounds(true);
