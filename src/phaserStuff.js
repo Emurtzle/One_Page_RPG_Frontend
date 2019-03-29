@@ -47,6 +47,7 @@ function preload() {
     this.load.audio('oof', './assets/oof.mp3')
     this.load.audio('nice', './assets/nice.mp3')
     this.load.image('iceboi', './assets/zero.png')
+    this.load.image('boss', './assets/bigBaddie.png');
 
     this.load.audio('despacito', './assets/despacito.mp3')
     this.load.audio('yeahboi', './assets/yeahboi.mp3')
@@ -277,6 +278,29 @@ function create() {
 
 }
 
+function loadBoss() {
+    console.log("Creating boss");
+    var xPos = Math.floor((Math.random() * 600) +100);
+    var yPos = Math.floor((Math.random() * 500) + 5);
+    var rand = Math.floor((Math.random() * 3) + 1);
+    var tempBh;
+
+    tempBh = them.physics.add.sprite(xPos, yPos, 'boss');
+    bh = new Blockhead(blockHeadArray.length+1, "Big Boss", 25, 5, 7, 3, 4);
+    bh.setBhPiece(tempBh);
+    tempBlockheadArray.push(bh);
+    enemies.add(tempBh);
+    them.physics.add.collider(heroPiece, tempBh, () => {heroDamage(bh)});
+    tempBh.setCollideWorldBounds(true);
+    tempBh.setScale(2);
+
+    let tempDiv = createBhDiv(bh.id);
+    bh.setDiv(tempDiv);
+    let targetsDiv = document.getElementById("targetDiv");
+    targetDiv.appendChild(tempDiv);
+    bh.displayStats();
+}
+
 function createBlockHeads(that, blockHeadArray) {
     tempBlockheadArray = blockHeadArray;
     for (const bh of tempBlockheadArray) {
@@ -450,6 +474,7 @@ function checkBlockheadDeath() {
             levelInc()
             lBar.style.background = "yellow"
             lBar.innerText =  "LEVEL UP!!!!"
+            loadBoss();
             setTimeout(() => {
                 lBar.style.background = "";
                 lBar.innerText = sam.level
