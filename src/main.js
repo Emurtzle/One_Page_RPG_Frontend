@@ -89,11 +89,13 @@ function toggleHUD() {
     if (showing === true){
         stats.style="visibility: hidden"
         targetDiv.style="visibility: hidden"
+        nameForm.style="visibility: hidden"
         showing = false
     }
     else{
         stats.style=""
         targetDiv.style=""
+        nameForm.style=""
         showing = true
     }
 }
