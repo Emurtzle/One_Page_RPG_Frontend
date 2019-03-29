@@ -362,6 +362,7 @@ function createBlockHeads(that, blockHeadArray) {
         if (rand == 3) {
             tempBh = that.physics.add.sprite(xPos, yPos, 'iceboi');
             bh.setBhPiece(tempBh);
+            bh.attack += 2;
             enemies.add(tempBh);
             that.physics.add.collider(heroPiece, tempBh, () => {heroDamageFreeze(bh)});
             tempBh.setCollideWorldBounds(true);
@@ -510,14 +511,18 @@ function update(){
 function checkBlockheadDeath() {
     for (let i = 0; i<tempBlockheadArray.length; i++) {
         if (tempBlockheadArray[i].isDead()){
+            let saveBh = tempBlockheadArray[i]
             tempBlockheadArray[i].die();
             enemies.children.entries[i].destroy();
             tempBlockheadArray.splice(i,1);
 
             killBlockheadSound.play();
             if (progPercentage < 100) {
-            progPercentage += 25;
-            document.styleSheets[0].cssRules[1].style.width = progPercentage.toString()+'%'}
+                if(saveBh.getBhPiece().attack >=3){
+                progPercentage += 40;}
+                else {
+                progPercentage += 25;}
+                document.styleSheets[0].cssRules[1].style.width = progPercentage.toString()+'%'}
             else {
             document.styleSheets[0].cssRules[1].style.width = "0%"
             progPercentage = 0
