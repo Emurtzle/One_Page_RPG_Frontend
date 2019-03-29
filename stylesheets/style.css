@@ -15,7 +15,7 @@
 }
 main {
     display: grid;
-    grid-template-columns: 15% 30% 45%;
+    grid-template-columns: 15% 30% 20% 35%;
     grid-gap: 1em;
     margin-top: 50px;
     max-width: 1200px;
@@ -43,6 +43,18 @@ item3 {
     padding: 10px;
     width: 100px; 
     font-family: 'Courier New', Courier, monospace;
+}
+
+.levelup {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+ul {
+    list-style-type: none;
+}
+li:hover {
+    background-color: rgb(206, 85, 206);
+    cursor: copy;
 }
 
 .targets {
