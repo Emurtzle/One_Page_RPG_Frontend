@@ -15,6 +15,8 @@ var config = {
     }
 };
 var game = new Phaser.Game(config);
+let playing;
+let playButton = document.createElement('button')
 var woof;
 var nice;
 var heroPiece;
@@ -280,6 +282,7 @@ function create() {
 
     healtex = this.add.sprite(400, 300, 'healtex0').play('healFactor');
 
+
     loadWall(150,200, 0.5);
     loadWall(150,232, 0.5);
     loadWall(150,264, 0.5);
@@ -318,6 +321,10 @@ function loadWall(x, y, scale) {
     for (var elem of enemies.children.entries) {
         them.physics.add.collider(elem, wall);
     }
+
+    setPlayPause()
+
+
 }
 
 function loadBoss() {
@@ -543,4 +550,24 @@ function renameFighter(ev) {
     ev.preventDefault()
     heroName.innerText = newName.value
     sam.name = newName.value
+}
+
+function setPlayPause() {
+    playing = false;
+    them.physics.pause();
+    playButton.innerText = "START!"
+    playButton.addEventListener('click', playPause)
+    p.appendChild(playButton)
+}
+
+function playPause() {
+    playButton.innerText = "❙❙ ►"
+    if (playing === false) {
+        them.physics.resume()
+        playing = true
+    }
+    else {
+        them.physics.pause()
+        playing = false
+    }
 }

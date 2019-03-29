@@ -99,3 +99,21 @@ function toggleHUD() {
         showing = true
     }
 }
+
+// let playing;
+// playing = false;
+// let playButton = document.createElement('button')
+// playButton.innerText = "❙❙ ►"
+// playButton.addEventListener('click', playPause)
+// p.appendChild(playButton)
+// them.physics.pause();
+// let
+// function playPause() {
+//     if (playing === false) {
+//         them.physics.resume()
+//         playing != playing
+//     }
+//     else {
+//         them.physics.pause()
+//     }
+// }
