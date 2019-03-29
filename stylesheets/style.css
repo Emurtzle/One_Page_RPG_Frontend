@@ -15,7 +15,7 @@
 }
 main {
     display: grid;
-    grid-template-columns: 15% 45% 20%;
+    grid-template-columns: 15% 30% 45%;
     grid-gap: 1em;
     margin-top: 50px;
     max-width: 1200px;

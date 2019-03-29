@@ -28,6 +28,7 @@ var killBlockheadSound;
 var statsDiv = document.getElementById("stats");
 var lBar = document.getElementById('level')
 var progBar = document.styleSheets[0].cssRules[1].style.width
+var leveler = document.getElementById('levelup')
 
 var tempBlockheadArray;
 
@@ -369,7 +370,7 @@ function setCanHeal() {
     canHeal = false;
     setTimeout(() => {
     canHeal = true;
-}, 500);
+}, 1000);
 }
 
 function setInvincibility() {
@@ -439,20 +440,31 @@ function checkBlockheadDeath() {
 
             killBlockheadSound.play();
             if (killCounter < 100) {
-            killCounter += 50;
+            killCounter += 25;
             document.styleSheets[0].cssRules[1].style.width = killCounter.toString()+'%'}
             else {
             document.styleSheets[0].cssRules[1].style.width = "0%"
             killCounter = 0
             sam.addLevelStat()
+            levelUp()
             lBar.style.background = "yellow"
             lBar.innerText =  "LEVEL UP!!!!"
             setTimeout(() => {
                 lBar.style.background = "";
                 lBar.innerText = sam.level
             }, 1000);
+            them.physics.pause()
             }
             
         }
     }
+}
+
+function levelUp(){
+    levelup.style = ''
+    levelup.style.background = "yellow"
+    uphealth.addEventListener('click', () => {sam.addHealthStat()})
+    upattack.addEventListener('click', () => {sam.addAttackStat()})
+    updefense.addEventListener('click', () => {sam.addDefenseStat()})
+    upspeed.addEventListener('click', () => {sam.addSpeedStat()})
 }

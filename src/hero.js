@@ -51,11 +51,17 @@ class Hero {
     addSpeedStat() {
         this.speed++;
         this.displayStats();
+        them.physics.resume();
+        levelup.style = 'visibility: hidden';
+        levelup.style.background = ""
     }
 
     addHealthStat() {
-        this.health++;
+        this.maxHealth++;
         this.displayStats();
+        them.physics.resume();
+        levelup.style = 'visibility: hidden';
+        levelup.style.background = ""
     }
 
     addLevelStat() {
@@ -66,5 +72,15 @@ class Hero {
     addDefenceStat() {
         this.defence++;
         this.displayStats();
+        them.physics.resume();
+        levelup.style = 'visibility: hidden';
+        levelup.style.background = ""
+    }
+    addAttackStat() {
+        this.attack++;
+        this.displayStats();
+        them.physics.resume();
+        levelup.style = 'visibility: hidden';
+        levelup.style.background = ""
     }
 }
