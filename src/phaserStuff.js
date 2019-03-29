@@ -35,7 +35,7 @@ var tempBlockheadArray;
 var invincible = false;
 var canHeal = true;
 var audioSlower = 0;
-var killCounter = 0;
+var progPercentage = 0;
 var heroSpeed = 0;
 var frozen = false;
 
@@ -439,14 +439,14 @@ function checkBlockheadDeath() {
             tempBlockheadArray.splice(i,1);
 
             killBlockheadSound.play();
-            if (killCounter < 100) {
-            killCounter += 25;
-            document.styleSheets[0].cssRules[1].style.width = killCounter.toString()+'%'}
+            if (progPercentage < 100) {
+            progPercentage += 25;
+            document.styleSheets[0].cssRules[1].style.width = progPercentage.toString()+'%'}
             else {
             document.styleSheets[0].cssRules[1].style.width = "0%"
-            killCounter = 0
+            progPercentage = 0
             sam.addLevelStat()
-            levelUp()
+            levelInc()
             lBar.style.background = "yellow"
             lBar.innerText =  "LEVEL UP!!!!"
             setTimeout(() => {
@@ -460,11 +460,11 @@ function checkBlockheadDeath() {
     }
 }
 
-function levelUp(){
+function levelInc(){
     levelup.style = ''
     levelup.style.background = "yellow"
     uphealth.addEventListener('click', () => {sam.addHealthStat()})
     upattack.addEventListener('click', () => {sam.addAttackStat()})
-    updefense.addEventListener('click', () => {sam.addDefenseStat()})
+    updefence.addEventListener('click', () => {sam.addDefenceStat()})
     upspeed.addEventListener('click', () => {sam.addSpeedStat()})
 }

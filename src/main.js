@@ -3,6 +3,8 @@ let sam;
 let blockHeadArray = [];
 
 let targetDiv = document.getElementById("targetDiv");
+let toggler = document.createElement('button') 
+let showing;
 
 let bh;
 let bh1;
@@ -72,4 +74,25 @@ function createBhDiv(id) {
     bhDiv.appendChild(bhHealthSpan);
 
     return bhDiv;
+}
+
+let p = document.createElement('p');
+toggler.innerText = "Toggle HUD"
+toggler.addEventListener('click', toggleHUD);
+p.appendChild(toggler);
+progress.appendChild(p);
+showing = true;
+
+
+function toggleHUD() {
+    if (showing === true){
+        stats.style="visibility: hidden"
+        targetDiv.style="visibility: hidden"
+        showing = false
+    }
+    else{
+        stats.style=""
+        targetDiv.style=""
+        showing = true
+    }
 }
