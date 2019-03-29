@@ -15,7 +15,7 @@
 }
 main {
     display: grid;
-    grid-template-columns: 15% 30% 20% 35%;
+    grid-template-columns: 15% 30% 24% 31%;
     grid-gap: 1em;
     margin-top: 50px;
     max-width: 1200px;
@@ -48,6 +48,7 @@ item3 {
 .levelup {
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
+    padding-right: 40px;
 }
 ul {
     list-style-type: none;
