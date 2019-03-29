@@ -431,7 +431,7 @@ function freeze() {
 }
 
 function heal() {
-    if (sam.heroPiece.x > 350 && sam.heroPiece.x < 450 && sam.heroPiece.y < 350 && sam.heroPiece.y > 250) {
+    if (sam.heroPiece.x > 350 && sam.heroPiece.x < 450 && sam.heroPiece.y < 350 && sam.heroPiece.y > 250 && playing === true) {
         // debugger;
         if (sam.health < sam.maxHealth && canHeal === true) {
         sam.health += 1;
