@@ -26,6 +26,7 @@ var healtex;
 var vortexAnim;
 var them;
 var music;
+var lastHit;
 var killBlockheadSound;
 let heroName = document.getElementById('name')
 var statsDiv = document.getElementById("stats");
@@ -349,6 +350,7 @@ function moveBlockheads() {
 
 function heroDamage(bh) {
     if (invincible == false) {
+        lastHit = bh
         woof.play();
         sam.takeDamage(bh.attack);
         bh.takeDamage(sam.attack);
@@ -358,6 +360,7 @@ function heroDamage(bh) {
 
 function heroDamageFreeze(bh) {
     if (invincible == false) {
+        lastHit = bh
         woof.play();
         sam.takeDamage(bh.attack);
         bh.takeDamage(sam.attack)
@@ -448,11 +451,10 @@ function update(){
     checkBlockheadDeath();
 
     if (sam.isDead()) {
-        them.add.text(game.config.width / 5, game.config.height / 2, 'GAME OVER', { fontSize: '96px', fill: '#fff' });
+        them.add.text(game.config.width / 5, game.config.height / 2, `KILLED BY ${lastHit.name.toUpperCase()}!`, { fontSize: '35px', fill: 'red' });
         them.physics.pause();
         gameOver = true;
     }
-
     if (tempBlockheadArray.length === 0) {
         them.add.text(game.config.width / 5, game.config.height / 2, 'YOU WIN!', { fontSize: '96px', fill: 'indigo' });
         them.physics.pause();
@@ -505,6 +507,7 @@ function renameFighter(ev) {
     ev.preventDefault()
     heroName.innerText = newName.value
     sam.name = newName.value
+    newName.value = ''
 }
 
 function setPlayPause() {
