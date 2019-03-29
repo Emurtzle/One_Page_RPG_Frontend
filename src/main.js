@@ -3,8 +3,6 @@ let sam;
 let blockHeadArray = [];
 
 let targetDiv = document.getElementById("targetDiv");
-let toggler = document.createElement('button') 
-let showing;
 
 let bh;
 let bh1;
@@ -76,7 +74,10 @@ function createBhDiv(id) {
     return bhDiv;
 }
 
-let p = document.createElement('p');
+let toggler = document.createElement('button') 
+let showing;
+let p;
+p = document.createElement('p');
 toggler.innerText = "Toggle HUD"
 toggler.addEventListener('click', toggleHUD);
 p.appendChild(toggler);

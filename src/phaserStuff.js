@@ -25,6 +25,7 @@ var vortexAnim;
 var them;
 var music;
 var killBlockheadSound;
+let heroName = document.getElementById('name')
 var statsDiv = document.getElementById("stats");
 var lBar = document.getElementById('level')
 var progBar = document.styleSheets[0].cssRules[1].style.width
@@ -467,4 +468,12 @@ function levelInc(){
     upattack.addEventListener('click', () => {sam.addAttackStat()})
     updefence.addEventListener('click', () => {sam.addDefenceStat()})
     upspeed.addEventListener('click', () => {sam.addSpeedStat()})
+}
+
+nameForm.addEventListener('submit', (ev) => {renameFighter(ev)})
+
+function renameFighter(ev) {
+    ev.preventDefault()
+    heroName.innerText = newName.value
+    sam.name = newName.value
 }
