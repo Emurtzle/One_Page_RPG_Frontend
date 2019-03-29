@@ -32,6 +32,7 @@ var statsDiv = document.getElementById("stats");
 var lBar = document.getElementById('level')
 var progBar = document.styleSheets[0].cssRules[1].style.width
 var leveler = document.getElementById('levelup')
+var walls;
 
 var tempBlockheadArray;
 
@@ -49,7 +50,8 @@ function preload() {
     this.load.audio('oof', './assets/oof.mp3')
     this.load.audio('nice', './assets/nice.mp3')
     this.load.image('iceboi', './assets/zero.png')
-    this.load.image('boss', './assets/bigBaddie.png');
+    this.load.image('boss', './assets/bigBaddie.png')
+    this.load.image('wall', './assets/wall.png')
 
     this.load.audio('despacito', './assets/despacito.mp3')
     this.load.audio('yeahboi', './assets/yeahboi.mp3')
@@ -155,6 +157,8 @@ function create() {
     them = this;
 
     killBlockheadSound = this.sound.add('yeahboi');
+
+    walls = this.physics.add.staticGroup();
 
     music = this.sound.add('despacito');
     music.play();
@@ -278,7 +282,48 @@ function create() {
 
     healtex = this.add.sprite(400, 300, 'healtex0').play('healFactor');
 
+
+    loadWall(150,200, 0.5);
+    loadWall(150,232, 0.5);
+    loadWall(150,264, 0.5);
+    loadWall(150,296, 0.5);
+    loadWall(150,328, 0.5);
+    loadWall(150,360, 0.5);
+
+    loadWall(650,200, 0.5);
+    loadWall(650,232, 0.5);
+    loadWall(650,264, 0.5);
+    loadWall(650,296, 0.5);
+    loadWall(650,328, 0.5);
+    loadWall(650,360, 0.5);
+
+    loadWall(380, 100, 0.5);
+    loadWall(412, 100, 0.5);
+    loadWall(444, 100, 0.5);
+
+
+    loadWall(380, 500, 0.5);
+    loadWall(412, 500, 0.5);
+    loadWall(444, 500, 0.5);
+
+
+}
+
+function loadWall(x, y, scale) {
+    var wall = them.physics.add.sprite(x,y, 'wall');
+    walls.add(wall);
+    wall.setScale(scale);
+    wall.body.immovable = true;
+    wall.body.moves = false;
+
+    them.physics.add.collider(heroPiece, wall);
+
+    for (var elem of enemies.children.entries) {
+        them.physics.add.collider(elem, wall);
+    }
+
     setPlayPause()
+
 
 }
 
@@ -350,8 +395,8 @@ function moveBlockheads() {
 function heroDamage(bh) {
     if (invincible == false) {
         woof.play();
-        sam.takeDamage(bh.attack);
-        bh.takeDamage(sam.attack);
+        sam.takeDamage(bh.attack - (0.5 * sam.defence));
+        bh.takeDamage(sam.attack - (0.5 * bh.defence));
         setInvincibility();
     }
 }
@@ -359,8 +404,8 @@ function heroDamage(bh) {
 function heroDamageFreeze(bh) {
     if (invincible == false) {
         woof.play();
-        sam.takeDamage(bh.attack);
-        bh.takeDamage(sam.attack)
+        sam.takeDamage(bh.attack - (0.5 * sam.defence));
+        bh.takeDamage(sam.attack - (0.5 * bh.defence));
         heroPiece.setVelocityX(0);
         heroPiece.setVelocityY(0);
         setInvincibility();
