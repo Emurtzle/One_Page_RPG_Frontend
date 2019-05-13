@@ -11,7 +11,7 @@ let bh3;
 let bh4;
 
 //fetch the hero
-fetch("http://localhost:3000/api/v1/heros")
+fetch("https://java-the-script-backend.herokuapp.com/api/v1/heros")
 .then(response => response.json())
 .then(json => {
     loadHeroData(json);
@@ -22,7 +22,7 @@ function loadHeroData(json) {
     sam.displayStats();
 }
 
-fetch("http://localhost:3000/api/v1/blockheads")
+fetch("https://java-the-script-backend.herokuapp.com/api/v1/blockheads")
 .then(response => response.json())
 .then(json => {
     loadBlockHeadData(json);
